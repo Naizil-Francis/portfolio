@@ -6,285 +6,413 @@
     <title>Naizil Francis D Costa - Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
+        /* Color Variables */
+        :root {
+            --bg-color: #000;
+            --text-color: #fff;
+            --accent-color: #1f2937; /* Dark Gray */
+            --link-color: #3b82f6; /* Blue */
+            --hover-link-color: #60a5fa; /* Light Blue */
         }
 
+        .light-mode {
+            --bg-color: #fff;
+            --text-color: #000;
+            --accent-color: #f3f4f6; /* Light Gray */
+            --link-color: #2563eb; /* Darker Blue */
+            --hover-link-color: #1d4ed8; /* Even Darker Blue */
+        }
+
+        /* Global Styles */
+        * {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styles */
         header {
             position: fixed;
-            width: 100%;
-            height: 100vh; /* Header covers the entire page initially */
             top: 0;
-            z-index: 1000;
-            background-color: #000;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: height 0.5s ease, padding 0.5s ease;
+            z-index: 1000;
         }
 
         header.minimized {
-            height: auto; /* Header minimizes */
-            padding: 1rem;
+            height: 80px;
+            padding: 0 2rem;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
         }
 
-        header.minimized .header-content {
+        /* Header Content */
+        .header-content {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
         }
 
-        header.minimized img {
-            width: 40px;
-            height: 40px;
+        header.minimized .header-content {
+            flex-direction: row;
+            text-align: left;
         }
 
-        header.minimized h1 {
-            font-size: 1.25rem;
-            margin-left: 0.5rem;
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+
+        header.minimized .profile-pic {
+            width: 50px;
+            height: 50px;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        header.minimized .name {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-left: 1rem;
+        }
+
+        .degree {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
         }
 
         header.minimized .degree {
             display: none;
         }
 
+        /* About Section */
+        .about {
+            max-width: 600px;
+            margin-top: 1.5rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
         header.minimized .about {
             display: none;
         }
 
-        header.minimized .links {
+        /* Links */
+        .links {
             display: flex;
-            flex-direction: row;
-            align-items: center;
             gap: 1rem;
+            margin-top: 1.5rem;
         }
 
-        .header-content {
+        .links a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 1rem;
+            border: 2px solid var(--link-color);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
         }
 
-        .about {
-            margin-top: 2rem; /* Added margin for spacing */
-            text-align: center;
-            padding: 0 2rem; /* Added padding for left and right space */
+        .links a:hover {
+            background-color: var(--link-color);
+            color: var(--text-color);
+        }
+
+        .links a span {
+            margin-left: 0.5rem;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .toggle-switch label {
+            background-color: var(--accent-color);
+            width: 50px;
+            height: 25px;
+            border-radius: 9999px;
+            position: relative;
+            transition: background-color 0.5s ease;
+        }
+
+        .toggle-switch label::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 19px;
+            height: 19px;
+            background-color: var(--text-color);
+            border-radius: 50%;
+            transition: transform 0.5s ease;
+        }
+
+        .toggle-switch input:checked + label {
+            background-color: var(--link-color);
+        }
+
+        .toggle-switch input:checked + label::after {
+            transform: translateX(25px);
+        }
+
+        /* Main Content Sections */
+        main {
+            padding-top: 100vh;
+            background-color: var(--accent-color);
         }
 
         section {
-            margin-top: 50vh; /* Adjusted to accommodate header height */
-            padding: 0 1.5rem; /* Reduced padding */
+            padding: 4rem 2rem;
         }
 
-        a {
-            color: #fff;
-        }
-
-        a:hover {
-            color: #aaa;
-        }
-
-        .bg-black {
-            background-color: #000;
-        }
-
-        .text-white {
-            color: #fff;
-        }
-
-        h2 {
+        .section-title {
             font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 1rem; /* Reduced margin */
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
         }
 
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem; /* Reduced margin */
-        }
-
-        p {
-            font-size: 1.125rem;
-            line-height: 1.75rem;
-        }
-
-        ul {
-            margin-top: 0.5rem; /* Reduced margin */
-        }
-
-        li {
-            font-size: 1rem;
-            line-height: 1.5rem;
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background-color: var(--link-color);
+            display: block;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
         }
 
         .container {
+            max-width: 1000px;
             margin: 0 auto;
-            max-width: 1200px;
-            padding: 0 1.5rem; /* Uniform padding */
         }
 
+        /* Footer */
         footer {
-            background-color: #fff;
-            color: #000;
-            padding: 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem;
         }
 
-        .footer-links {
+        footer .footer-links {
             display: flex;
             justify-content: center;
-            gap: 1rem; /* Space between links */
+            gap: 1rem;
             margin-top: 1rem;
         }
 
-        .footer-links a {
-            color: #000;
+        footer .footer-links a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
         }
 
-        .footer-links a:hover {
-            color: #333;
+        footer .footer-links a:hover {
+            color: var(--hover-link-color);
         }
 
-        .footer-links span {
-            color: #000;
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .name {
+                font-size: 2rem;
+            }
+
+            header.minimized .name {
+                font-size: 1.2rem;
+            }
+
+            .links a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
         }
     </style>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header id="header" class="bg-black text-white">
+
+    <!-- Header -->
+    <header id="header">
         <div class="header-content">
-            <img src="mypic2.jpg" alt="Naizil Francis D Costa" class="w-40 h-40 rounded-full mb-2">
-            <h1 class="text-4xl font-bold">Naizil Francis D Costa</h1>
-            <p class="text-xl degree">Bachelor of Engineering in Computer Science and Engineering (AIML)</p>
+            <img src="mypic2.jpg" alt="Naizil Francis D Costa" class="profile-pic" id="profile-pic">
+            <h1 class="name">Naizil Francis D Costa</h1>
+            <p class="degree">Bachelor of Engineering in Computer Science and Engineering (AIML)</p>
+            <p class="about">
+                I am a highly motivated engineering student specializing in Computer Science with a focus on Artificial Intelligence and Machine Learning. My interests lie in Machine Learning, Data Analytics, and Digital Image Processing.
+            </p>
+            <div class="links">
+                <a href="tel:+919686718318"><span role="img" aria-label="Phone">📞</span> Phone</a>
+                <a href="mailto:naizilfrancis07@gmail.com"><span role="img" aria-label="Email">📧</span> Email</a>
+                <a href="https://www.linkedin.com/in/naizil-francis-d-costa" target="_blank"><span role="img" aria-label="LinkedIn">🔗</span> LinkedIn</a>
+                <a href="https://github.com/Naizil-Francis" target="_blank"><span role="img" aria-label="GitHub">🐙</span> GitHub</a>
+            </div>
         </div>
-        <br>
-        <div class="about">
-            <p>I am a highly motivated engineering student specializing in Computer Science with a focus on Artificial Intelligence and Machine Learning. My interests lie in Machine Learning, Data Analytics, and Digital Image Processing.</p>
-            <br><br><br><br><br>
-        </div>
-        
-        <div class="links">
-            <a href="tel:+919686718318" class="text-white hover:text-gray-400 mx-2">
-                <span class="text">Phone</span>
-            </a>
-            <a href="mailto:naizilfrancis07@gmail.com" class="text-white hover:text-gray-400 mx-2">
-                <span class="text">Email</span>
-            </a>
-            <a href="https://www.linkedin.com/in/naizil-francis-d-costa" target="_blank" class="text-white hover:text-gray-400 mx-2">
-                <span class="text">LinkedIn</span>
-            </a>
-            <a href="https://github.com/Naizil-Francis" target="_blank" class="text-white hover:text-gray-400 mx-2">
-                <span class="text">GitHub</span>
-            </a>
+        <div class="toggle-switch">
+            <input type="checkbox" id="theme-toggle">
+            <label for="theme-toggle"></label>
         </div>
     </header>
 
-    <section class="education bg-black text-white py-8" id="education">
-        <div class="container">
-            <h2 class="text-center">Education</h2>
-            <div class="timeline">
-                <div class="timeline-item mb-4">
+    <!-- Main Content -->
+    <main>
+        <!-- Education Section -->
+        <section id="education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="education-item">
+                    <img src="education-icon.png" alt="Education" class="w-12 h-12 inline-block mb-2">
                     <h3>Sahyadri College of Engineering and Management (2021-2025)</h3>
-                    <p><strong>CGPA: 9.5</strong></p>
+                    <p><strong>CGPA:</strong> 9.5</p>
                 </div>
-                <div class="timeline-item mb-4">
+                <div class="education-item">
+                    <img src="education-icon.png" alt="Education" class="w-12 h-12 inline-block mb-2">
                     <h3>Indraprastha Pre University College (2019-2021)</h3>
-                    <p><strong>Percentage: 95.67</strong></p>
+                    <p><strong>Percentage:</strong> 95.67%</p>
                 </div>
-                <div class="timeline-item">
+                <div class="education-item">
+                    <img src="education-icon.png" alt="Education" class="w-12 h-12 inline-block mb-2">
                     <h3>Indraprastha Vidyalaya (2019)</h3>
-                    <p><strong>Percentage: 91.04</strong></p>
+                    <p><strong>Percentage:</strong> 91.04%</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="projects bg-black text-white py-8" id="projects">
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <div class="project-item">
+                    <img src="p1.png" alt="Project" class="w-12 h-12 inline-block mb-2">
+                    <h3>Panchayath Scheme Management System</h3>
+                    <p>A web application for registering and managing schemes offered by panchayath.</p>
+                    <ul>
+                        <li><strong>Tools & Technologies:</strong> MySQL, Flask, HTML, CSS, JavaScript</li>
+                        <li><strong>Features:</strong> Scheme application by villagers, management by village officers.</li>
+                    </ul>
+                </div>
+                <div class="project-item">
+                    <img src="p22.png" alt="Project" class="w-12 h-12 inline-block mb-2">
+                    <h3>Inclination Prediction of an Individual</h3>
+                    <p>An application for detecting if a person is sad, happy, or angry.</p>
+                    <ul>
+                        <li><strong>Tools & Technologies:</strong> Image Processing, Machine Learning, MATLAB</li>
+                        <li><strong>Features:</strong> Predicts emotions based on trained models.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title">Experience</h2>
+                <div class="experience-item">
+                    <img src="experience-icon.png" alt="Experience" class="w-12 h-12 inline-block mb-2">
+                    <h3>CoE-AIML Intern</h3>
+                    <p>Worked on face recognition model development using Image Processing and Machine Learning techniques.</p>
+                </div>
+                <div class="experience-item">
+                    <img src="experience-icon.png" alt="Experience" class="w-12 h-12 inline-block mb-2">
+                    <h3>College Team Lead</h3>
+                    <p>Led a team for a project on Satellite Image Classification and played a role in ensuring accurate classification using AI techniques.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
         <div class="container">
-            <h2 class="text-center">Projects</h2>
-            <div class="project-item mb-4">
-                <h3>Panchayath Scheme Management System</h3>
-                <p>A web application for registering and managing schemes offered by panchayath.</p>
-                <ul class="list-disc list-inside mt-4">
-                    <li>Tools & technologies: MySQL, Flask Application, HTML, CSS, JavaScript.</li>
-                    <li>Features: Scheme application by villagers, management by village officers.</li>
-                </ul>
+            <p>&copy; 2024 Naizil Francis D Costa. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/naizil-francis-d-costa" target="_blank"><span role="img" aria-label="LinkedIn">🔗</span></a>
+                <a href="https://github.com/Naizil-Francis" target="_blank"><span role="img" aria-label="GitHub">🐙</span></a>
+                <a href="mailto:naizilfrancis07@gmail.com"><span role="img" aria-label="Email">📧</span></a>
             </div>
-            <div class="project-item">
-                <h3>Inclination Prediction of an Individual</h3>
-                <p>An application for detecting if a person is sad, happy, or angry.</p>
-                <ul class="list-disc list-inside mt-4">
-                    <li>Tools & technologies: Image Processing, Machine Learning, MATLAB.</li>
-                    <li>Features: Predicts emotions based on trained models.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="experience bg-black text-white py-8" id="experience">
-        <div class="container">
-            <h2 class="text-center">Experience</h2>
-            <div class="experience-item mb-4">
-                <h3>CoE-AIML Intern</h3>
-                <p>Worked on face recognition model development using Image Processing and Machine Learning techniques.</p>
-            </div>
-            <div class="experience-item">
-                <h3>Synergia Volunteer</h3>
-                <p>Volunteered at Sahyadri College to manage the 'BlindBytes' event as part of Synergia.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-white text-black py-4 text-center">
-        <p>&copy; 2024 Naizil Francis D Costa | Designed as portfolio</p>
-        <div class="footer-links">
-            <a href="tel:+919686718318" class="text-black hover:text-gray-600">
-                <span class="text">Phone</span>
-            </a>
-            <span class="text-black mx-2">|</span>
-            <a href="mailto:naizilfrancis07@gmail.com" class="text-black hover:text-gray-600">
-                <span class="text">Email</span>
-            </a>
-            <span class="text-black mx-2">|</span>
-            <a href="https://www.linkedin.com/in/naizil-francis-d-costa" target="_blank" class="text-black hover:text-gray-600">
-                <span class="text">LinkedIn</span>
-            </a>
-            <span class="text-black mx-2">|</span>
-            <a href="https://github.com/Naizil-Francis" target="_blank" class="text-black hover:text-gray-600">
-                <span class="text">GitHub</span>
-            </a>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.9/scrollreveal.min.js"></script>
+    <!-- Scripts -->
     <script>
-        const header = document.getElementById('header');
-        const links = document.querySelectorAll('.links a span.text');
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
 
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
+        themeToggle.addEventListener('change', () => {
+            body.classList.toggle('light-mode');
+        });
+
+        // Header Minimization on Scroll
+        const header = document.getElementById('header');
+        const profilePic = document.getElementById('profile-pic');
+        let isHeaderMinimized = false;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50 && !isHeaderMinimized) {
                 header.classList.add('minimized');
-                links.forEach(link => link.style.display = 'inline');
-            } else {
+                isHeaderMinimized = true;
+            } else if (window.scrollY <= 50 && isHeaderMinimized) {
                 header.classList.remove('minimized');
-                links.forEach(link => link.style.display = 'inline');
+                isHeaderMinimized = false;
             }
         });
 
-        ScrollReveal().reveal('.education, .projects, .experience', {
-            duration: 1000,
-            origin: 'bottom',
-            distance: '50px',
-            easing: 'ease-in-out',
+        // Header Maximization on Profile Pic Click
+        profilePic.addEventListener('click', () => {
+            if (isHeaderMinimized) {
+                header.classList.remove('minimized');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                isHeaderMinimized = false;
+            }
         });
     </script>
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
