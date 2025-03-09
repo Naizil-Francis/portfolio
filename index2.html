@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naizil Francis D Costa - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f5f5f5;
+            --accent-color: #1c1c1c;
+            --primary-color: #4f46e5;
+            --hover-primary: #4338ca;
+        }
+
+        .light-mode {
+            --bg-color: #ffffff;
+            --text-color: #111827;
+            --accent-color: #f3f4f6;
+            --primary-color: #2563eb;
+            --hover-primary: #1d4ed8;
+        }
+
+        * {
+            transition: all 0.4s ease-in-out;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            background-color: var(--accent-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--hover-primary);
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .card {
+            background-color: var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background-color: var(--accent-color);
+            padding: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="mypic2.jpg" alt="Naizil Francis D Costa" class="profile-pic">
+        <nav class="nav-links">
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="education" class="section">
+            <h2 class="text-3xl font-bold mb-4">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <div class="card">
+                    <h3 class="text-xl font-semibold">Sahyadri College</h3>
+                    <p>CGPA: 9.5</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold">Indraprastha PU College</h3>
+                    <p>Percentage: 95.67%</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="text-3xl font-bold mb-4">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <div class="card">
+                    <h3 class="text-xl font-semibold">Panchayath Scheme Management</h3>
+                    <p>Web application for scheme registration.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold">Inclination Prediction</h3>
+                    <p>Emotion detection using ML.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2 class="text-3xl font-bold mb-4">Experience</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <div class="card">
+                    <h3 class="text-xl font-semibold">CoE-AIML Intern</h3>
+                    <p>Worked on face recognition models.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Naizil Francis D Costa</p>
+    </footer>
+</body>
+</html>
